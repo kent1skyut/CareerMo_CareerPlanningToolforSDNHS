@@ -27,7 +27,7 @@ mysql-connector-python==8.0.33
 mysqlclient==2.1.1
 numpy==1.21.6
 numpy==1.21.6
-packaging==19.2
+packaging==20.0
 pandas==0.24.2
 Pillow==6.0.0
 protobuf==3.0.0
