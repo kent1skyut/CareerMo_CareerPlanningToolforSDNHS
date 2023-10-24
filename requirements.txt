@@ -30,7 +30,7 @@ numpy==1.21.6
 packaging==20.0
 pandas==0.24.2
 Pillow==6.2.0
-protobuf==3.0.0
+protobuf==3.11.0
 PyMySQL==0.9.3
 pyparsing==2.4.0
 python-dateutil==2.7.5
