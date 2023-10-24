@@ -43,3 +43,4 @@ tzdata==2023.3
 uuid==1.30
 Werkzeug==2.2.2
 WTForms==2.2
+gunicorn==19.7.1
