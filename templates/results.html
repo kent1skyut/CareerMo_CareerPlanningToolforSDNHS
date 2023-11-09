@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US" dir="ltr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,20 +7,26 @@
     <title>Assessment Results</title>
     <!-- Include Bootstrap CSS -->
     <link href="static/assets/css/theme.css" rel="stylesheet" />
+    <style>
+      .custom-toggler-icon {
+        background-image: url('static/assets/img/icons/111111.png'); /* Replace with the path to your custom icon image */
+        background-size: contain;
+        width: 24px; /* Adjust width as needed */
+        height: 24px; /* Adjust height as needed */
+        display: inline-block; /* Ensure proper display */
+      }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2 d-block bg-light" data-navbar-on-scroll="data-navbar-on-scroll" data-navbar-on-scroll="data-navbar-on-scroll">
+<main class="main" id="top">
+
+         <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2 d-block bg-light" data-navbar-on-scroll="data-navbar-on-scroll" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container">
             <a class="navbar-brand text-dark" href="index.html"><img src="static/assets/img/gallery/logooo.png" height="50" alt="CareerMo" />CareerMo</a>
-            <button class="navbar-toggler color-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+            <button class="navbar-toggler custom-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class=" custom-toggler-icon"></span></button>
             <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link fw-medium active text-black" aria-current="page" href="#home">Home</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-black" href="#aboutUs">About us</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-black" href="#clients">Motivations</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-black" href="#">Logout</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor">
-                    <form id="search-form" method="POST" action="/search_job" class="navbar-form ml-auto">
+                <form id="search-form" method="POST" action="/search_job" class="navbar-form ml-auto">
                         <div class="input-group">
                             <input type="text" name="search_query" class="form-control" id="jobSearch" placeholder="Search jobs..." autocomplete="off">
                             <div class="input-group-append">
@@ -30,19 +36,23 @@
                         <!-- Suggestions container to display job title suggestions -->
                         <div id="suggestions"></div>
                     </form>
-
+                <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+                    <a class="nav-link fw-medium active text-black" aria-current="page" href="/">Back To Home <svg class="bi bi-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                        </svg></a>
                     </li>
 
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container mt-8">
-        <div class="col-md-6 mx-auto">
-            <div class="bg-light p-4 rounded shadow">
-                <h1 class="mt-2 mb-4 text-danger text-center">Top Recommended Careers</h1>
+    <div class="container mt-8 bg-transparent p-4 rounded shadow">
+        <div class="">
+
+                <div class="mb-4"><a class="fs-2 text-dark mb-5">Recommended Career Clusters</a></div>
+                <a class="mt-2 mb-6 text-dark fs-1 text-start ">Based on your skills and interests, below is your top 5 Recommended Career. This career aligns well with what you excel at and what you enjoy. Embrace the opportunities that come with it and get ready for a fulfilling journey!"</a>
                 {% if recommended_careers %}
-                    <ul class="list-group">
+                    <ul class="list-group mt-4 mb-4">
                         {% for career, percentage in recommended_careers %}
                             <li class="list-group-item">{{ career }} </li>
                         <!-- ==================({{ percentage }}% Match)==========================-->
@@ -51,7 +61,7 @@
                 {% else %}
                     <p>No recommendations available at the moment.</p>
                 {% endif %}
-            </div>
+
 
 
            <!-- =================  <div class="mt-4">
@@ -60,14 +70,57 @@
                 <p><strong>Recall Score:</strong> {{ recall }}</p>
                 <p><strong>F1 Score:</strong> {{ f1 }}</p>
             </div> =======================-->
-            <div class="mt-4 text-center">
-                <a href="/" class="btn btn-primary">Back to Home</a>
-            </div>
+        </div>
+    <div class="mt-4">
+     {% if plot_data %}
+    <style>
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto; /* Center the image */
+        }
+    </style>
+    <img src="data:image/png;base64,{{ plot_data }}" alt="Matching Percentage Chart" class="responsive-image">
+    {% endif %}
+
+    </div>
+
+        <div class="mt-4">
+
+        <div class="mt-4">
+
+
+            <p class="lead text-start">
+                After looking at your results, it seems like the job that suits you best is <strong>{{ recommended_careers[0][0] }}</strong>. This job group has lots of different types of work that match what you're good at and interested in. Some jobs are about pushing the limits in the field, while others are the important foundation of the industry. You have a bunch of options here! It's a place where you can learn, grow, and enjoy what you do. This career group not only offers a satisfying job but also helps the workforce to grow. So, get ready for your journey, because there are exciting things waiting for you in this career area.
+            </p>
+
+            <p class="text-start fw-bold mt-3">
+               Here's a job list related to your top recommended career cluster:
+            </p>
+
+            <ul class="list-group text-start">
+                {% for occupation in top_occupations %}
+                    <li class="list-group-item">{{ occupation }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
         </div>
     </div>
-    <!-- Include Bootstrap JS and jQuery (optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</main>
+
+
+    <script src="static/vendors/@popperjs/popper.min.js"></script>
+    <script src="static/vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="static/vendors/is/is.min.js"></script>
+    <script src="static/https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="static/vendors/fontawesome/all.min.js"></script>
+    <script src="static/assets/js/theme.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Rubik:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
 </body>
 </html>

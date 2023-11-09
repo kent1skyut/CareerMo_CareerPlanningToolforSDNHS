@@ -1,26 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Assessment Form</title>
-    <link href="static/assets/css/theme.css" rel="stylesheet" />
-</head>
-<body>
+<html lang="en-US" dir="ltr" xmlns="http://www.w3.org/1999/html">
 
- <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2 d-block bg-light" data-navbar-on-scroll="data-navbar-on-scroll" data-navbar-on-scroll="data-navbar-on-scroll">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>CareerMo | Your Career Guidance Buddy</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="static/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="static/assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="static/assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="static/assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="static/assets/css/theme.css" rel="stylesheet" />
+
+    <style>
+      .custom-toggler-icon {
+        background-image: url('static/assets/img/icons/111111.png'); /* Replace with the path to your custom icon image */
+        background-size: contain;
+        width: 24px; /* Adjust width as needed */
+        height: 24px; /* Adjust height as needed */
+        display: inline-block; /* Ensure proper display */
+      }
+    </style>
+
+
+  </head>
+
+
+  <body>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          <ul class="flash-messages">
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+    {% endwith %}
+
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+        <main class="main" id="top">
+
+         <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2 d-block bg-light" data-navbar-on-scroll="data-navbar-on-scroll" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container">
             <a class="navbar-brand text-dark" href="index.html"><img src="static/assets/img/gallery/logooo.png" height="50" alt="CareerMo" />CareerMo</a>
-            <button class="navbar-toggler color-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+            <button class="navbar-toggler custom-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class=" custom-toggler-icon"></span></button>
             <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link fw-medium active text-black" aria-current="page" href="#home">Home</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-black" href="#aboutUs">About us</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-black" href="#clients">Motivations</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-black" href="#">Logout</a></li>
-                    <li class="nav-item px-2" data-anchor="data-anchor">
-                    <form id="search-form" method="POST" action="/search_job" class="navbar-form ml-auto">
+                <form id="search-form" method="POST" action="/search_job" class="navbar-form ml-auto">
                         <div class="input-group">
                             <input type="text" name="search_query" class="form-control" id="jobSearch" placeholder="Search jobs..." autocomplete="off">
                             <div class="input-group-append">
@@ -30,13 +78,17 @@
                         <!-- Suggestions container to display job title suggestions -->
                         <div id="suggestions"></div>
                     </form>
-
+                <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+                    <a class="nav-link fw-medium active text-black" aria-current="page" href="/">Back To Home <svg class="bi bi-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                        </svg></a>
                     </li>
 
                 </ul>
             </div>
         </div>
     </nav>
+
 <section id="home">
     <div class="bg-holder" style="background-image: url(static/assets/img/gallery/main-bg.jpg); background-position: center; background-size: cover; filter: blur(10px); height: 100vh;"></div>
 
@@ -68,7 +120,7 @@
         </div>
     </div>
 </section>
-
+<main>
 <script src="static/vendors/@popperjs/popper.min.js"></script>
 <script src="static/vendors/bootstrap/bootstrap.min.js"></script>
 <script src="static/vendors/is/is.min.js"></script>

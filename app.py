@@ -15,6 +15,10 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 import random
 #from wtforms import StringField, PasswordField, validators
 #import bcrypt
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
 
 
 app = Flask(__name__)
@@ -58,6 +62,11 @@ model.fit(X, y_encoded)
 
 # Save the trained model
 joblib.dump(model, 'decision_tree_model.joblib')
+
+
+# Load the data from career.csv
+career_data = pd.read_csv('All_Career_Clusters.csv', encoding='utf-8')
+
 
 
 # Define the AssessmentForm with a dynamic field for questions
@@ -187,6 +196,7 @@ def decision_tree():
     return render_template('decision_tree.html')
 
 
+
 @app.route('/assess', methods=['GET', 'POST'])
 def assess():
     form = AssessmentForm(request.form)
@@ -241,9 +251,34 @@ def assess():
         accuracy = accuracy_score(true_careers, predicted_careers)
         f1 = f1_score(true_careers, predicted_careers, average='micro')
 
+        top_occupations = []
+        for career, _ in recommended_careers:
+            occupations_for_career = career_data[career_data['Career Cluster'] == career]
+            random_occupations = random.sample(list(occupations_for_career['Occupation']),min(15, len(occupations_for_career)))
+            top_occupations.extend(random_occupations)
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(predicted_careers, matching_percentages, marker='o', color='green', linestyle='-')
+        plt.xlabel('Career Clusters')
+        plt.ylabel('Matching Percentage')
+        plt.title('This graph shows the percentage match of assessment result in different Career Cluster.')
+        plt.xticks(rotation=45, ha='right')
+        plt.tight_layout()
+
+        # Save the plot to a BytesIO object
+        img = BytesIO()
+        plt.savefig(img, format='png')
+        img.seek(0)
+
+        # Convert the plot to base64 encoding for embedding in HTML
+        plot_data = base64.b64encode(img.getvalue()).decode()
+
+
+
         # Render an HTML template to display the results
         return render_template('results.html', recommended_careers=recommended_careers, accuracy=accuracy,
-                               precision=precision, recall=recall, f1=f1)
+                               precision=precision, recall=recall, f1=f1, plot_data=plot_data, top_occupations=top_occupations)
+
     # If it's a GET request, render the assessment form
     questions = load_questions_from_csv()
 
